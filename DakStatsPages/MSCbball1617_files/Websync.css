@@ -1,0 +1,714 @@
+﻿
+/* Will strip off unwanted content and add addition content during print */
+@media print
+{
+	#ctl00_websyncContentPlaceHolder_filterRadioButtonList{display: none;}
+	#ctl00_websyncPageTitleTabs_pageTitleTabsTable{display: none;}
+	#bannerAdDiv{ display: none;}
+	#headerTable{ display: none;}
+	#ctl00_websyncHeader_navThreeDiv{ display: none;}
+	#ctl00_websyncHeader_navFourDiv{ display: none;}
+	#ctl00_websyncTeamRecord_recordDiv{ display: none;}
+    #ctl00_websyncTeamProfile_teamProfileDiv{ display: none;}
+    #ctl00_websyncSmallConferenceStandings{ display: none;}
+    #ctl00_websyncTrackAStar_trackAStarDiv{display: none;}
+    #quickLeadersDiv{ display: none;}
+    #ctl00_websyncAdvertisingSidebar_rightAddColumn{ display: none;}    
+    #websyncBottomSponsorsTable{ display: none;} 
+    #conferenceStandings{ display: none;}  
+    #rightSponsorTable{ display: none;}   
+    #footerDiv{ display: none;}   
+    #printerFriendlyMessageDiv{ display: none;}  
+    #ctl00_websyncPageTitle_datePrintedLabel{ display: block; }  
+    #mainTable{ display: none;}
+    #ctl00_websyncPageTitle_quickLinksTable{ display: none;}
+    #ctl00_PlayerHeader_selectDiffPlayerHyperLink{ display: none;}
+    #statsTabTable{ display: none;}
+    
+    #radioButtonDiv{display: none;}
+    #ctl00_websyncContentPlaceHolder_overallConferenceLabel{display: block;}
+    
+    #radioButtonPlayerHighDiv{display: none;}
+    #ctl00_websyncContentPlaceHolder_overallConfPlayerHighLabel{display: block;}
+    
+    #radioButtonSeasonStatsDiv{display: none;}
+    #ctl00_websyncContentPlaceHolder_overallConfSeasonStatsLabel{display: block;}
+    
+    #radioButtonSeasonDiv{display: none;}
+    #ctl00_websyncContentPlaceHolder_overallConferenceSeasonLabel{display: block;}
+    
+    #radioButtonTeamLeaders{display: none;}
+    #ctl00_websyncContentPlaceHolder_overallConferenceTeamLeadersLabel{display: block;}
+    
+    #radioButtonIndividualLeadersDiv{display: none;}
+    #ctl00_websyncContentPlaceHolder_overallConfIndividualLeadersLabel{display: block;}
+    
+     #ctl00_websyncContentPlaceHolder_gameHighsTabControl_gameHighSummaryControl_gameHighCompleteListImageHyperlink{display:none;}
+    
+    .printLink
+    {
+        display: none;   
+    }
+    
+    *:link,
+*:visited,
+*:hover,
+*:active	{text-decoration: none !important; color: #000000 !important; font-size: 12px; cursor:default;}
+}
+
+@media screen
+{
+    #printerFriendlyMessageDiv,
+    #ctl00_websyncPageTitle_datePrintedLabel,
+    #ctl00_websyncContentPlaceHolder_overallConferenceLabel,
+    #ctl00_websyncContentPlaceHolder_overallConfPlayerHighLabel,
+    #ctl00_websyncContentPlaceHolder_overallConfSeasonStatsLabel,
+    #ctl00_websyncContentPlaceHolder_overallConferenceSeasonLabel,
+    #ctl00_websyncContentPlaceHolder_overallConferenceTeamLeadersLabel,
+    #ctl00_websyncContentPlaceHolder_overallConfIndividualLeadersLabel {display: none;}
+    
+    .printLink
+    {
+        display: block;   
+        color: #606060 !important; font: normal 8pt "Arial", sans-serif;
+    }
+    a.printLink:link,
+    a.printLink:visited,
+    a.printLink:active {color: Navy; font-size: 8pt; font-weight: bold; text-decoration: none;  }
+    a.printLink:hover {color: Navy; font-size: 8pt; font-weight: bold; text-decoration: underline;  }
+}
+
+/* CSS Element level ----------------------------------------------- */
+body{ font: normal 12px" Arial", sans-serif; color: #000000; background-color: #FFFFFF; border: none 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px; text-decoration: none;}
+table,
+td,
+tr {padding: 0px; margin: 0px; border: none; border-collapse:collapse;}
+
+img{border:0px;}
+textarea{border:1px solid #c0c0c0;}
+select {text-decoration: none; }
+
+/*ul{list-style-type: square;	padding: 10px;	margin: 10px; font-size: 12px;}*/
+
+.headerOne{color:Navy; font-size: 8pt; padding-right: 25px; font-weight: bold;}
+a.headerOne:link, a.headerOne:visited, a.headerOne:active {color: Navy; font-size: 8pt; font-weight: bold; text-decoration: none;  }
+a.headerOne:hover {color: Navy; font-size: 8pt; font-weight: bold; text-decoration: underline;  }
+
+.navTwo{color:#FFFFFF !important; font-size: 8pt; padding-left: 25px; font-weight: bold;}
+a.navTwo:link, a.navTwo:visited, a.navTwo:active {font-size: 8pt; color: #FFFFFF !important; text-decoration: none;  }
+a.navTwo:hover {font-size: 8pt; color: #FFFFFF !important; text-decoration: underline; }
+    
+/* These Classes control the llok of the footer control -- */
+td.footerTD{padding-right: 20px; font-size: 8pt; color: #d0d0d0;}
+a.footerLink:link, a.footerLink:visited, a.footerLink:hover, a.footerLink:active {color: #d0d0d0; text-decoration: underline; }
+
+/* Classes that style navigation three items*/
+.navigationThreeMenuItem {text-align:center; padding-top: 2px; padding-left: 8px; padding-right: 8px; height:20px; font-size: 8pt; text-decoration:none; color:navy; font-weight:bold;}
+a.navigationThreeMenuItem:link, 
+a.navigationThreeMenuItem:visited, 
+a.navigationThreeMenuItem:active{text-align:center; width:90%; height:20px; font-size: 8pt; text-decoration:none; color:navy; font-weight:bold;}
+a.navigationThreeMenuItem:hover{text-align:center; width:90%; height:20px; font-size: 8pt; text-decoration:underline; color:navy; font-weight:bold;}
+
+/* Classes that style navigation three selected items*/
+.navigationThreeMenuItemSelected {border-left: solid 1px #a8a8a8; border-right: solid 1px #a8a8a8; text-align:center; height:20px; font-size: 8pt; text-decoration:none; padding-left: 8px; padding-right: 8px; font-weight:normal; width: 100%; background-color: #d0d0d0;}
+
+a.navigationThreeMenuItemSelected:link, 
+a.navigationThreeMenuItemSelected:visited, 
+a.navigationThreeMenuItemSelected:hover, 
+a.navigationThreeMenuItemSelected:active {text-align:center; height:20px; font-size: 8pt; text-decoration:none; color:navy; font-weight:bold; color: black; border: solid 1px #a8a8a8; text-decoration:none;}
+
+*:link, 
+*:visited,
+*:active  {text-decoration: underline; color: #110E82; font: normal 11px" Arial", sans-serif;}
+*:hover		{text-decoration: underline; color: #3366CC; font-size: 11px;}
+
+a.teamNameLinks:active, 
+a.teamNameLinks:link, 
+a.teamNameLinks:visited {font-weight: bold; text-decoration: none; color: #333; font-size: 10pt;}
+a.teamNameLinks:hover	{font-weight: bold; text-decoration: underline; color: #000080; font-size: 10pt;}
+
+a.quickLeaders:active, 
+a.quickLeaders:link, 
+a.quickLeaders:visited {text-decoration: underline; color: #110E82; font-size: 8pt;}
+a.quickLeaders:hover	{text-decoration: underline; color: #3366CC; font-size: 8pt;}
+
+a.tableHeaderLink:active, 
+a.tableHeaderLink:link, 
+a.tableHeaderLink:visited {font: bold 12px "Arial", sans-serif; text-decoration: none; color: #FFF; }
+a.tableHeaderLink:hover	  {font: bold 12px "Arial", sans-serif; text-decoration: none; color: #C0C0C0; }
+
+/* Size 8 font sets --------------------------------------------------*/
+.d8 {color: #000000 !important; font: normal 8pt "Arial", sans-serif;}
+.d8bl{color: #446FA2 !important; font: bold 8pt "Arial", sans-serif;}
+.d8b{color: #333366 !important; font: normal 8pt "Arial", sans-serif;}
+.d8g{color: #006600 !important; font: normal 8pt "Arial", sans-serif;}
+.d8gr{color: #606060 !important; font: normal 8pt "Arial", sans-serif;}
+.d8r{color: #990000 !important; font: normal 8pt "Arial", sans-serif;}
+.d8w{color: #FFFFFF !important; font: normal 8pt "Arial", sans-serif;}
+.d8o{color: #CC6633 !important; font: normal 8pt "Arial", sans-serif;}
+
+/* Size 10 font sets ---------------------------------------------------- */
+.d10 {color: #000000 !important; font: normal 10pt 'Arial', sans-serif;}
+.d10b{color: #333366 !important; font: normal 10pt" Arial", sans-serif;}
+.d10g{color: #006600 !important; font: normal 10pt 'Arial', sans-serif;}
+.d10gr{color: #606060 !important; font: normal 10pt 'Arial', sans-serif;}
+.d10r{color: #990000 !important; font: normal 10pt 'Arial', sans-serif;}
+.d10w{color: #FFFFFF !important; font: normal 10pt" Arial", sans-serif;}
+.d10o{color: #CC6633 !important; font: normal 10pt" Arial", sans-serif;}
+
+.radioButton label
+{
+	color: #000000 !important;
+	font: normal 10pt 'Arial', sans-serif;
+	text-decoration: none;
+}
+
+/* For Form Buttons ------------------------------------ */
+	.btnCommon
+	{	
+		cursor: default;
+		color: #000000; 
+		font: normal 10pt 'Aria', sans-serif;
+		margin: 0px 0px 0px 2px;
+		padding: 1px 6px 1px 6px;
+		background-color: #D0D0D0; 
+		border: solid .05em #B0B0B0;
+		background-image:url(/DakInfo/images/btnBG.gif);
+		height: 23px;
+		text-decoration:none;
+	}
+	
+	/* For Form Buttons ------------------------------------ */
+	.btnCommonSmall
+	{	
+		color: #000000; 
+		font: normal 9pt "Arial", sans-serif;
+		margin: 0px 0px 0px 2px;
+		padding: 1px 1px 5px 1px;
+		background-color: #D0D0D0; 
+		border: solid .05em #B0B0B0;
+		background-image:url(/DakInfo/images/btnBG.gif);
+		height: 20px;
+	}
+	
+/* For editable grid style datalists  ----------------------- */
+
+.EditDataList{
+    border:1px solid gray;
+    padding:0px;
+    width:775px;
+}
+.EditDataList tr{
+    margin:0px;
+}
+.EditDataList th{
+    background-color:navy;
+    color:white;
+    padding:0px;
+    border:1px solid navy;
+    font-size:8pt;
+    height:20px;
+}
+
+.EditDataList td{
+    padding:0px;
+    border:1px solid #C0C0C0; 
+    margin:0px;           
+}
+
+.EditDataList input{
+    border:0px;
+}
+
+.EditDataList select{
+    width:100%;
+}        
+
+/* --- Styling for grids and dataViews   ----- */
+.lightGradHeader td
+{
+	background: url(/WebSync/Images/gradient-bar.jpg) repeat-x top;
+	font: bold 12px "Arial", sans-serif;
+	padding: 1px 0px 1px 0px;
+	height: 18px;
+	color: #333;
+	text-align: center;
+}
+.lightGradHeader2 td
+{
+	background: url(/WebSync/Images/gradient-bartall.jpg) repeat-x top;
+	font: bold 12px "Arial", sans-serif;
+	padding: 1px 0px 1px 0px;
+	height: 33px;
+	color: #333;
+	text-align: center;
+}
+
+/* Datalist headers*/
+.mainHeaderTable tr td 
+{
+	background: url(/WebSync/Images/mainHeaderBar.jpg) repeat-x top;
+	font: bold 12px "Arial", sans-serif;
+	padding: 1px 0px 1px 0px;
+	height: 18px;
+	color: #FFFFFF;
+	border: solid 1px #999999;
+	text-align: center;
+}
+.subHeaderTable td
+{
+	/* background: url(/WebSync/Images/subHeaderBar.jpg) repeat-x top;*/
+	background-color: #D0D0D0;
+	font: bold 11px "Arial", sans-serif;
+	height: 18px;
+	text-align: center; 
+	border: solid 1px #d0d0d0;
+}
+.colorHeaderTable td
+{
+	font: bold 12px "Arial", sans-serif;
+	height: 18px;
+	text-align: center; 
+}
+/* datalist and gridview row styles */
+.defaultRow td
+{
+	font: normal 11px "Arial", sans-serif;
+	text-align: center;
+	height: 18px;
+	background: #FFFFFF;
+
+}
+.alternateRow td
+{
+	font: normal 11px "Arial", sans-serif;
+	text-align: center;
+	background-color: #E8E8E8;
+	height: 18px;
+	
+}
+/* datalist border */
+.tableWrapper
+{ 
+	border: solid 1px #d0d0d0;
+	border-top: 0px;
+}
+/* Gridview Header */
+/* background image of darkGradient and white font color */
+.gridView th
+{
+	font-family: "Arial";
+	font-size: 12px;
+	color: #FFF;
+	background-image: url(/WebSync/Images/mainHeaderBar.jpg);
+	background-repeat: repeat-x;
+	border: solid 1px #999999;
+}
+
+.gridViewHeaderLeftAlign
+{
+	text-align: left;
+	font-family: "Arial";
+	font-size: 12px;
+	color: #FFFFFF;
+	background-image: url(/WebSync/Images/mainHeaderBar.jpg);
+	background-repeat: repeat-x;
+	border: solid 1px #999999;
+}
+
+.gridView
+{
+	text-align: center;
+	border: solid 1px #999999;
+}
+
+.gridViewSubHeader
+{
+	text-align: center;
+	border: solid 1px #999999;
+}
+
+/* background image of light Gradient and black font color */
+.gridViewSubHeader th
+{
+	text-align: left;
+	font-family: "Arial";
+	font-size: 11px;
+    background-color: #C0C0C0 ;
+	border: solid 1px #d0d0d0;
+	color: #FFF;
+}
+
+
+.gridViewReportBuilder
+{
+	font-family: "Arial";
+	font-size: 12px;
+	border: solid 1px #C0C0C0 ;
+	background-color: #C0C0C0 ;
+	width: 100%;
+	
+}
+
+.gridViewReportBuilder th
+{
+	font-family: "Arial";
+	font-size: 11px;
+	border: solid 1px #C0C0C0 ;
+	background-color: #C0C0C0 ;
+}
+
+
+.gridViewReportBuilderWide
+{
+   
+	font-family: "Arial";
+	font-size: 12px;
+	border: solid 1px #C0C0C0 ;
+	background-color: #C0C0C0 ;
+	width: 750px;
+}
+
+.gridViewReportBuilderWide  th
+{
+	font-family: "Arial";
+	font-size: 11px;
+    background-color: #C0C0C0 ;
+	border: solid 1px #d0d0d0;
+	color: #333;
+}
+
+.gridViewReportBuilderWideVB
+{
+	font-family: "Arial";
+	font-size: 10px;
+	font-weight:bold;
+	border: solid 1px #C0C0C0 ;
+	background-color: #C0C0C0 ;
+}
+
+.gridViewTDWideVB td
+{
+	font: normal 11px "Arial", sans-serif;
+	text-align: center;
+	border-right:solid 1px #d0d0d0;
+	border-bottom:solid 1px #d0d0d0;
+	border-top:solid 1px #d0d0d0;
+	border-left:solid 1px #d0d0d0;
+	
+	background-color: #C0C0C0 ;
+}
+
+/* datalist and gridview row styles */
+.defaultRowGridView td
+{
+	font: normal 11px "Arial", sans-serif;
+	height: 18px;
+	background: #FFFFFF;
+
+}
+.alternateRowGridView td
+{
+	font: normal 11px "Arial", sans-serif;
+	background-color: #E8E8E8;
+	height: 18px;
+}
+
+.GridPager td 
+{
+    padding:3px 3px 3px 3px;
+    font-size: 10pt;
+    font-weight:normal;
+    font-family: Arial;
+    font-weight: bold; 
+}
+.GridPager a
+{
+    padding:3px 3px 3px 3px;
+    font-size: 10pt;
+    font-weight:normal;
+    font-family: Arial;
+    font-weight: bold; 
+}
+
+.GridPager a:link	{text-decoration: none; color: red; font-size: 10pt;  font-weight: bold;  font-family: Arial;}
+.GridPager a:visited	{text-decoration: none; color: red; font-size: 10pt;  font-weight: bold;  font-family: Arial;}
+.GridPager a:hover	{text-decoration: none; color: #3366CC; font-size: 10pt;  font-weight: bold;  font-family: Arial;}
+.GridPager a:active	{text-decoration: none; color: #110E82; font-size: 10pt;  font-weight: bold;  font-family: Arial;}
+
+.teamComparisonDefault
+{
+	border-bottom:solid 1px silver; 
+	color: #000000 !important;
+	font: normal 11px "Arial", sans-serif;
+}
+
+.teamComparisonAlternate
+{
+	
+	background-color: #E8E8E8;
+	border-bottom:solid 1px silver;
+	color: #000000 !important;
+	font: normal 11px "Arial", sans-serif;
+}
+
+.pageTitleText
+{
+    font-size: 12pt;
+    color: #333; 
+    font-weight: bold;  
+    
+}
+
+.noResults
+{
+	border: solid 1px #d0d0d0;
+	display: none;
+	text-align: center; 
+	vertical-align: middle ;
+	color: #333366 !important; 
+	font: normal 10pt" Arial", sans-serif;
+}
+  
+
+   
+/* Gridview takes default css hyperlink attributes these do not affect the gridview
+a.gridView:link {color: #FFFFFF !important; text-decoration:none;}
+a.gridView:visited {color: #FFFFFF !important; text-decoration:none;}
+a.gridView:hover {color: #FFFFFF !important; text-decoration:none;}
+a.gridView:active {color: #FFFFFF !important; text-decoration:none;}*/
+
+	/*class used to style a Required form label  ---*/
+	.frmLabelRed
+	{
+		color: #8B0000; 
+		font: bold 9pt "Arial", sans-serif;
+		width: 90px;
+		height: 19px;
+		padding: 1pX;
+	}
+	
+	/* For Form Buttons ------------------------------------ */
+	.btnCommon
+	{	
+		cursor: default;
+		color: #000000; 
+		font: normal 10pt '"Arial"', sans-serif;
+		margin: 0px 0px 0px 2px;
+		padding: 1px 6px 1px 6px;
+		background-color: #D0D0D0; 
+		border: solid .05em #B0B0B0;
+		background-image:url(/DakInfo/images/btnBG.gif);
+		height: 23px;
+	}
+	
+	/* For Form Buttons ------------------------------------ */
+	.btnCommonSmall
+	{	
+		color: #000000; 
+		font: normal 9pt "Arial", sans-serif;
+		margin: 0px 0px 0px 2px;
+		padding: 1px 1px 5px 1px;
+		background-color: #D0D0D0; 
+		border: solid .05em #B0B0B0;
+		background-image:url(/DakInfo/images/btnBG.gif);
+		height: 20px;
+	}
+	
+	.btnTransparent
+	{
+	    color: #000000; 
+		font: normal 7pt "Arial", sans-serif;
+		padding: 0px 1px 0px 1px;
+		background-color:Transparent; 
+		border: solid .05em #a8a8a8;
+		height: 20px;   
+	}
+		
+	/* For Type Ahead Combo in a table needed 
+	   because of the "float" problem ------------------------- */
+	.typeAheadCombo
+	{
+		background-color: #FFFFFF;
+		color: #000000; 
+		font: normal 10pt '"Arial"', sans-serif;
+		width: 185px;
+		height: 22px;
+		BORDER: #4c4c4c 1px solid;
+		padding: 0PX 1px 0px 3px;
+	}
+
+/* CSS For Input boxes ------------------------------------------ */	
+	
+	.xLargeBox	
+	{
+		background-color: #FFFFFF;
+		color: #000000; 
+		font: normal 10pt '"Arial"', sans-serif;
+		width: 200px;
+		height: 19px;
+		BORDER: #c0c0c0 1px solid;
+		padding: 0PX 1px 0px 3px;
+	}
+	.largeBox	
+	{		
+		background-color: #FFFFFF;
+		color: #000000 !important; 
+		font: normal 10pt '"Arial"', sans-serif;
+		width: 150px;
+		height: 19px;
+		BORDER: #c0c0c0 1px solid;
+		padding: 0PX 1px 0px 3px;
+		text-decoration:none;
+	}
+	.medBox		
+	{	
+		background-color: #FFFFFF;
+		color: #000000 !important; 
+		font: normal 10pt '"Arial"', sans-serif;
+		width: 100px;
+		height: 19px;
+		BORDER: #c0c0c0 1px solid;
+		padding: 0PX 1px 0px 3px;
+	}
+	.smallBox	
+	{
+		background-color: #FFFFFF;
+		color: #000000 !important; 
+		font: normal 10pt '"Arial"', sans-serif;
+		width: 50px;
+		height: 19px;
+		BORDER: #c0c0c0 1px solid;
+		padding: 0PX 1px 0px 3px;
+	}
+	.xSmallBox	
+	{
+		background-color: #FFFFFF;
+		color: #000000 !important; 
+		font: normal 10pt '"Arial"', sans-serif;
+		width: 25px;
+		height: 19px;
+		BORDER: #c0c0c0 1px solid;
+		padding: 0PX 1px 0px 3px;
+	}
+	.frmTextArea
+	{
+		background-color: #FFFFFF;
+		color: #000000 !important; 
+		font: normal 10pt '"Arial"', sans-serif;
+		BORDER: #c0c0c0 1px solid;
+		padding: 1px;
+		overflow: auto;
+	}
+
+	.frmCheckBox
+	{
+		color: #000000 !important; 
+		font: normal 9pt "Arial", sans-serif;
+		background-color: #FFFFFF;
+		padding: 1pX;
+	}
+	.frmRadio
+	{
+		color: #000000 !important; 
+		font: normal 9pt "Arial", sans-serif;
+		background-color: #FFFFFF;
+		BORDER: #c0c0c0 1px solid;
+		height: 21px;
+		padding: 1pX 15pX 1pX 15pX;
+	}
+
+/* lacrosse gridview and row styles Applies only for Lacrosse main stats grid*/
+.lacrosseGridView
+{
+	text-align:center;
+    width:100%;
+    border-collapse:collapse;   
+    border-top:solid 1px #999999;
+    border-left:solid 1px #999999;
+    border-right:solid 1px #999999;
+    border-bottom:none;
+    margin-bottom:0;
+    position:relative;
+    top:1px;
+}
+
+.lacrosseGridView th
+{
+	font-family: "Arial";
+	font-size: 12px;
+	color: #FFF;
+	background-image: url(/WebSync/Images/mainHeaderBar.jpg);
+	background-repeat: repeat-x;
+	border: solid 1px #999999;
+}
+
+.lacrosseGridViewStatsCol1
+{
+	width:35px;
+}
+
+.lacrosseGridViewStatsCol2
+{
+	width:30px;
+}
+
+.lacrosseGridViewStatsCol3
+{
+	width:120px;
+}
+
+.lacrosseGridViewStatsCol4
+{
+	width:30px;
+}
+
+.lacrosseGridViewStatsCol5
+{
+	width:35px;
+}
+
+.lacrosseGridViewStatsCol6
+{
+	width:30px;
+}
+
+.lacrosseGridViewStatsCol7
+{
+	width:30px;
+}
+
+.lacrosseGridViewStatsCol8
+{
+	width:30px;
+}
+
+.lacrosseGridViewStatsCol9
+{
+	width:30px;
+}
+
+.lacrosseGridViewStatsCol10
+{
+	width:30px;
+}
+
+.lacrosseGridViewStatsCol11
+{
+	width:30px;
+}
+
+.lacrosseGridViewStatsCol12
+{
+	width:65px;
+}
+
+.lacrosseGridViewStatsCol13
+{
+	width:50px;
+}
+
+.lacrosseGridViewStatsCol14
+{
+	width:30px;
+}

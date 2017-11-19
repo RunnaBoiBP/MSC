@@ -1,0 +1,182 @@
+/* setup */
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  height: 100%; }
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+
+body {
+  background-color: #ccc;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%; }
+
+.hide {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important; }
+
+/* Banner Styles */
+#banner {
+  position: relative;
+  width: 160px;
+  height: 600px;
+  border: solid 1px #000;
+  overflow: hidden;
+  background-color: #f8e4d8;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); }
+  #banner .bannerClick {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"); }
+  #banner .background, #banner .guide {
+    position: absolute;
+    left: -67px;
+    top: -30px;
+    width: 275px;
+    height: 700px;
+    image-rendering: -webkit-optimize-contrast; }
+  #banner .darkLayer {
+    background-color: #000;
+    opacity: 0;
+    display: none; }
+  #banner .laptop {
+    height: 1200px;
+    width: 640px;
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
+    -webkit-transform-origin: bottom left;
+            transform-origin: bottom left; }
+    #banner .laptop .bg {
+      position: absolute;
+      height: 600px;
+      width: 640px;
+      background-color: #E5D1B4;
+      top: 0;
+      left: 0; }
+    #banner .laptop img {
+      position: absolute;
+      bottom: 0;
+      left: 0; }
+  #banner .copy {
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 160px;
+    height: 600px;
+    pointer-events: none;
+    z-index: 11; }
+    #banner .copy #boldCopy path, #banner .copy #newCopy path {
+      display: none; }
+    #banner .copy #line {
+      display: none; }
+  #banner .underline {
+    display: inline-block;
+    border-bottom: 2px solid #87633d;
+    height: 23px; }
+  #banner .boldCopy {
+    position: absolute;
+    left: 13px;
+    top: 106px;
+    width: 140px;
+    height: 112px;
+    font-size: 20px;
+    font-family: 'CircularStd-Book', sans-serif;
+    color: #87633d;
+    line-height: 23.3px; }
+    #banner .boldCopy span {
+      margin: 0;
+      opacity: 0; }
+    #banner .boldCopy #boldCopySpan0 {
+      margin-left: 24px; }
+    #banner .boldCopy #boldCopySpan3 {
+      display: none;
+      margin-left: 23px; }
+    #banner .boldCopy #boldCopySpan4 {
+      display: none;
+      margin-left: 2px; }
+    #banner .boldCopy #boldCopySpace {
+      display: none;
+      opacity: 0; }
+  #banner .screenCopy {
+    position: absolute;
+    left: 25px;
+    bottom: 196px;
+    width: 111px;
+    height: 71px; }
+  #banner #cursorContainer {
+    display: inline;
+    width: 5px;
+    height: 21px; }
+    #banner #cursorContainer #cursor {
+      position: absolute;
+      margin-top: 1px;
+      width: 5px;
+      height: 21px;
+      margin-left: -1px; }
+  #banner .thinCopy {
+    position: absolute;
+    left: 25px;
+    top: 206px;
+    width: 110px;
+    height: 50px;
+    text-decoration: underline;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.4px;
+    text-align: center;
+    line-height: 17px;
+    color: #87633d;
+    opacity: 0.7;
+    text-underline-position: under; }
+  #banner .logo {
+    position: absolute;
+    left: 24px;
+    top: 27px;
+    width: 110px;
+    height: 16px; }
+  #banner .cta {
+    position: absolute;
+    left: 18px;
+    bottom: 29px;
+    width: 123px;
+    height: 32px;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    cursor: pointer;
+    z-index: 10; }
+    #banner .cta .cta_copy {
+      padding-top: 5px !important;
+      opacity: 0; }
+  #banner .ctaCopy {
+    position: absolute;
+    left: 29px;
+    bottom: 41px;
+    height: 7px;
+    width: 101px;
+    z-index: 11;
+    pointer-events: none; }

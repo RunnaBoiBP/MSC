@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>
+	Conference Menu
+</title>
+    
+    <script type="text/javascript">
+
+    var currentLink = 0;
+    var stopMenu = 0;
+ 
+    function MouseOverMenuItem(menuItem)
+    {
+        document.getElementById(menuItem).style.backgroundColor = "#F1F1F1";
+    }
+    
+    function MouseOutMenuItem(menuItem)
+    {
+        document.getElementById(menuItem).style.backgroundColor = "#D7D7D7";
+    }
+    
+    function StartMenu()
+    {
+        stopMenu = 0;
+    }
+    
+    function StopMenu()
+    {
+        stopMenu = 1;
+        document.getElementById('menuUp').style.backgroundColor = 'White';
+        document.getElementById('menuDown').style.backgroundColor = 'White';
+    }
+    
+    function MoveMenuItems(direction)
+    {
+        if(stopMenu==0)
+        {
+            if(direction=='up')
+            {
+                
+                if(currentLink>0)
+                {
+                    document.getElementById('menuDown').style.visibility = 'visible';
+                    document.getElementById('menuUp').style.backgroundColor = 'silver';
+                    var element = 'conference_' + (currentLink + 9);
+                    var newElement = 'conference_' + (currentLink - 1);                    
+                    document.getElementById(element).style.display = "none";
+                    document.getElementById(newElement).style.display = "block";
+                    currentLink--;
+                    setTimeout("MoveMenuItems('up')",100);    
+                }
+                else
+                {
+                    document.getElementById('menuUp').style.visibility = 'hidden';
+                    return;
+                }        
+            }
+            else
+            {
+                if(document.getElementById('conferenceHiddenField').value>(currentLink + 10))
+                {          
+                    document.getElementById('menuUp').style.visibility = 'visible';
+                    document.getElementById('menuDown').style.backgroundColor = 'silver';
+                    var element = 'conference_' + currentLink;
+                    var newElement = 'conference_' + (currentLink + 10);                    
+                    document.getElementById(element).style.display = "none";
+                    document.getElementById(newElement).style.display = "block";
+                    currentLink++;
+                    setTimeout("MoveMenuItems('down')",100);
+                }
+                else
+                {
+                    document.getElementById('menuDown').style.visibility = 'hidden';
+                    return;
+                }
+            }
+        }
+        else{
+            return;
+        }
+    }
+
+</script>
+
+</head>
+<body style="background-color:#D7D7D7; margin-left:0px; margin-top:0px; position: absolute;" waid71fa0d88-5390-4b5b-a2f4-e45fa93d85e2="SA password protect entry checker">
+    <form name="form1" method="post" action="ConferenceDropDownList.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;SelectedSeasonID=NAIMBB_2015&amp;isCurrentSeason=NAIMBB_2017" id="form1">
+<div>
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTMyODY4Mzg3Mg9kFgICAw9kFgQCAw8WAh4Fc3R5bGUFhAFjdXJzb3I6aGFuZDt0ZXh0LWFsaWduOmNlbnRlcjtib3JkZXI6c29saWQgMXB4IHNpbHZlcjtiYWNrZ3JvdW5kLWNvbG9yOldoaXRlO3dpZHRoOjMxMHB4O2hlaWdodDoxNXB4O3Zpc2liaWxpdHk6aGlkZGVuO0Rpc3BsYXk6bm9uZTtkAgcPFgIfAAVyY3Vyc29yOmhhbmQ7dGV4dC1hbGlnbjpjZW50ZXI7Ym9yZGVyOnNvbGlkIDFweCBzaWx2ZXI7YmFja2dyb3VuZC1jb2xvcjpXaGl0ZTt3aWR0aDozMTBweDtoZWlnaHQ6MTVweDtEaXNwbGF5Om5vbmU7ZGSNekMgnswOE14cyRztF6jxNGP+OQ==" type="hidden">
+</div>
+
+        <input name="conferenceHiddenField" id="conferenceHiddenField" value="21" type="hidden">
+        <table style="width:100%" cellspacing="0" cellpadding="0">
+            <tbody><tr>
+                <td>
+                    <div id="menuUp" onmouseover="StartMenu(); MoveMenuItems('up');" onmouseout="StopMenu();" style="cursor:hand;text-align:center;border:solid 1px silver;background-color:White;width:310px;height:15px;visibility:hidden;Display:none;"><img id="Image2" src="arrowUp.gif" style="border-width:0px;"></div>
+                    <div id="menu_conference_child" style="width:98%; position: relative; visibility: visible; background: #D7D7D7;" nowrap=""><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB1_AMWC" id="conference_0" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_0');" onmouseout="MouseOutMenuItem('conference_0');">American Midwest Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_AAC" id="conference_1" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_1');" onmouseout="MouseOutMenuItem('conference_1');">Appalachian Athletic Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_CALPAC" id="conference_2" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_2');" onmouseout="MouseOutMenuItem('conference_2');">California Pacific Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_CCC" id="conference_3" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_3');" onmouseout="MouseOutMenuItem('conference_3');">Cascade Collegiate Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_CCAC" id="conference_4" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_4');" onmouseout="MouseOutMenuItem('conference_4');">Chicagoland Collegiate Athletic Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_CROSS" id="conference_5" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_5');" onmouseout="MouseOutMenuItem('conference_5');">Crossroads League</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB1_IND" id="conference_6" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_6');" onmouseout="MouseOutMenuItem('conference_6');">Division 1 Independents</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_IND" id="conference_7" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_7');" onmouseout="MouseOutMenuItem('conference_7');">Division 2 Independents</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB1_FC" id="conference_8" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_8');" onmouseout="MouseOutMenuItem('conference_8');">Frontier Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB1_GSAC" id="conference_9" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_9');" onmouseout="MouseOutMenuItem('conference_9');">Golden State Athletic Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_GPAC" id="conference_10" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_10');" onmouseout="MouseOutMenuItem('conference_10');">Great Plains Athletic Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB1_GCAC" id="conference_11" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_11');" onmouseout="MouseOutMenuItem('conference_11');">Gulf Coast Athletic Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB1_HAAC" id="conference_12" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_12');" onmouseout="MouseOutMenuItem('conference_12');">Heart of America Athletic Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_KCAC" id="conference_13" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_13');" onmouseout="MouseOutMenuItem('conference_13');">Kansas Collegiate Athletic Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB1_MSC" id="conference_14" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_14');" onmouseout="MouseOutMenuItem('conference_14');">Mid-South Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_NSTR" id="conference_15" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_15');" onmouseout="MouseOutMenuItem('conference_15');">North Star Athletic Association</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB1_RRAC" id="conference_16" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_16');" onmouseout="MouseOutMenuItem('conference_16');">Red River Athletic Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_KIAC" id="conference_17" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_17');" onmouseout="MouseOutMenuItem('conference_17');">River States Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB1_SAC" id="conference_18" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_18');" onmouseout="MouseOutMenuItem('conference_18');">Sooner Athletic Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB1_SSAC" id="conference_19" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_19');" onmouseout="MouseOutMenuItem('conference_19');">Southern States Athletic Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_FSC" id="conference_20" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_20');" onmouseout="MouseOutMenuItem('conference_20');">The Sun Conference</a><a href="http://www.dakstats.com/WebSync/Pages/Conference/Conference.aspx?association=10&amp;sg=MBB&amp;sea=NAIMBB_2015&amp;conference=NAIMBB2_WHAC" id="conference_21" target="_parent" style="font-family:arial;text-align:left;Width:100%;text-decoration:none;Height:15px;color:#333366;background-color:#D7D7D7;Display:block;letter-spacing:1px;cursor:hand;Padding-left:5px;margin-right:8px;font-size:8pt;" onmouseover="MouseOverMenuItem('conference_21');" onmouseout="MouseOutMenuItem('conference_21');">Wolverine-Hoosier Athletic Conference</a></div>
+                    <div id="menuDown" onmouseover="StartMenu(); MoveMenuItems('down');" onmouseout="StopMenu();" style="cursor:hand;text-align:center;border:solid 1px silver;background-color:White;width:310px;height:15px;Display:none;"><img id="Image1" src="DivisionDropDownList_data/arrowDown.gif" style="border-width:0px;"></div>
+                </td>
+            </tr>
+        </tbody></table>
+    </form>
+
+
+</body></html>

@@ -1,0 +1,73 @@
+/***************************************************************
+	Description:	CSS for Calendar Control
+	Application:	Global
+	Author:			Chris Binkerd	06/07/05
+	Modified:	
+**************************************************************** */
+
+.commonCalendarMain
+{
+}
+
+.commonCalendarDayHead
+{
+	background-color:#FFFFFF;
+	font: normal 9pt Arial;
+	color:#000000;
+	border-bottom: dashed 1px #C0C0C0;
+}
+
+.commonCalendarDays
+{
+	background-color:#FFFFFF;
+	font: normal 9pt Arial;
+	color: #333399;
+}
+
+.commonCalendarDropDown
+{
+	background-color:#FFFFFF;
+	font: normal 8pt Arial;	
+}
+
+.commonCalendarOtherMonthDays
+{
+	background-color:#FFFFFF;
+	font: normal 9pt Arial;
+	color:#C0C0C0;
+}
+
+.commonCalendarTitle
+{
+	background-color:#DCDCDC;
+}
+
+.commonCalendarToday
+{
+	border: solid 1px #8080FF;
+	font: bold 9pt Arial;	
+	background-color:#FFFFFF;
+}
+
+.commonCalendarSelectedDay
+{
+	background-color:#336699;
+	border: solid 1px #000000;
+	font: normal 9pt Arial;
+	color: #ffffff;	
+}
+
+.commonCalendarNextPrev
+{
+	background-color:#DCDCDC;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.commonCalendarWeekendDays
+{
+	font: normal 9pt  "Arial", Helvetica;
+	color:red;
+}
+
+

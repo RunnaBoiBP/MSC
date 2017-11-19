@@ -1,0 +1,188 @@
+---
+title: "Web Scraping for MSC"
+author: "Homer White & Ben Peterson"
+date: "10/24/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rvest)
+library(DataComputing)
+library(DT)
+```
+
+```{r echo = FALSE, results='asis'}
+cat("Source Documents: ")
+DataComputing::includeSourceDocuments()
+```
+
+
+## Our Aim
+
+We propose to scrape the NAIA website for data that was hand-collected by Ben Peterson, Austin Snider and Luke Garnett as part of a class project in MAT 332 in Spring 2017.
+
+## Tools Needed
+
+You'll want the usual packages:
+
+```{r eval=FALSE}
+library(rvest)         # for web-scraping
+library(DataComputing) # imports dplyr, ggplot2, etc.
+```
+
+## Grab Season Page
+
+We will work from the the site for a single season of Mid-South Conference mens basketball:
+
+>[http://www.dakstats.com/WebSync/Pages/Conference/ConferenceSchedule.aspx?association=10&sg=MBB&sea=NAIMBB_2015&conference=NAIMBB1_MS](http://www.dakstats.com/WebSync/Pages/Conference/ConferenceSchedule.aspx?association=10&sg=MBB&sea=NAIMBB_2015&conference=NAIMBB1_MS)
+
+Most of the tables in the above site are built with JavaScript, so you'll need to save that season page manually.  Open a browser, navigate to the above URL, and then Save As in a convenient place.
+
+Next, get the full path-name of the file by means of the following interactive command:
+
+```{r eval=F}
+filename <- file.choose()
+```
+
+Now that you have the path-name, read in the HTML:
+
+```{r eval = FALSE}
+page <- read_html(filename)
+```
+
+
+```{r echo=FALSE}
+# Psst!  Source-file readers!
+# I'll read in my locally-stored page.
+# If you wish to knit this document, replace the path-name below
+# with the path-name for your locally-stored html page.
+page <- read_html("/home/GEORGETOWNCOLLEGE.EDU/bpeterson/MSCBballShiny/DakStatsPages/MSCbball1516.html")
+```
+
+
+## Get the URLS
+
+Let's scrape the season page for the URLs of the game pages we need to consult.  All you have to do is peer deeply into the page and find CSS selectors that are associated with the data you want.
+
+```{r}
+rows <-
+  page %>%
+  html_nodes("table.defaultRow tbody tr")
+
+homeTeam <- rows %>% html_nodes("td:nth-child(1)") %>% html_text()
+awayTeam <- rows %>% html_nodes("td:nth-child(2)") %>% html_text()
+gameLinkText <- rows %>% html_nodes("td:nth-child(3) a") %>% html_text()
+gameURL <- rows %>% html_nodes("td:nth-child(3) a") %>% html_attr("href")
+
+df <- data.frame(homeTeam, awayTeam, gameURL,
+                 stringsAsFactors = FALSE)
+
+# use below if you want to filter for GC games only:
+#ourTeam <- "Georgetown (Ky.)"
+
+confGames <-
+  df %>%
+  filter(grepl("\\*", gameLinkText))
+```
+
+Let's have a look at the data table we created:
+
+```{r}
+DT::datatable(confGames)
+```
+
+## Get Game Stats
+
+Each of the URLs in the table above contains statistics for one of the Georgetown conference games during the season under study.  Our aim is to consult each link and extract the summary data for each of the two teams.  The following loop collects more or less the Peterson/Snider project data (for one season).
+
+
+```{r cache=TRUE}
+numVars <- c("oreb", 
+          "dreb", "reb", "ast", "to", 
+          "blk", "stl", "pf", "pts")
+
+# These variables will have to be tidied with regex at a later stage:
+charVars <- c("fgm", "threepm", "ftm")
+
+n <- nrow(confGames)
+id <- numeric(2*n)
+team <- character(2*n)
+status <- character(2*n)
+
+for ( i in seq(1, 2*n-1, by = 2) ) {
+  id[c(i, i + 1)] <- i
+  team[i] <- confGames$awayTeam[i]
+  team[i + 1] <- confGames$homeTeam[i]
+  status[i] <- "Away"
+  status[i + 1] <- "Home"
+}
+
+numMat <- matrix(0, nrow = 2*n, ncol = length(numVars))
+colnames(numMat) <- numVars
+charMat <- matrix("", nrow = 2*n, ncol = length(charVars))
+colnames(charMat) <- charVars
+
+for ( i in seq(1, 2*n-1, by = 2) ) {
+  xml <- read_html(confGames$gameURL[(i+1)/2])
+  
+  #get numerical variable values:
+  for ( var in numVars ) {
+    
+    selector <- paste0("span[id*='basketballTeamStatsAway_",
+                       var, "TotalLabel']")
+    numMat[i, var] <-xml %>%
+      html_nodes(selector) %>%
+      html_text() %>%
+      as.numeric()
+    
+    selector <- paste0("span[id*='basketballTeamStatsHome_",
+                       var, "TotalLabel']")
+    numMat[i + 1, var] <- xml %>%
+      html_nodes(selector) %>%
+      html_text() %>%
+      as.numeric()
+  }
+  
+  # get values of variables that need to be tidied later:
+  for ( var in charVars ) {
+    
+    selector <- paste0("span[id*='basketballTeamStatsAway_",
+                       var, "TotalLabel']")
+    charMat[i, var] <-xml %>%
+      html_nodes(selector) %>%
+      html_text()
+    
+    selector <- paste0("span[id*='basketballTeamStatsHome_",
+                       var, "TotalLabel']")
+    charMat[i + 1, var] <- xml %>%
+      html_nodes(selector) %>%
+      html_text()
+  }
+}
+
+df <- data.frame(id, team, status)
+df <- cbind(df, as.data.frame(numMat),
+            as.data.frame(charMat))
+```
+
+Adding in variables for season as a numeric and as a character string.
+```{r}
+df$Season <- 2015
+df$SeasonChar <- "15-16"
+S2015 <- df
+save(S2015,file="data/S2015.rda")
+```
+
+
+
+Here is the data table:
+
+```{r}
+DT::datatable(S2015)
+```
+
+
+
+
+
