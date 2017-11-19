@@ -9,3 +9,30 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Now, we will combine the season data frames into one data frame containing all
+of the games from each season collected.
+
+##Labeling the Data
+
+First, I will re-label the ID numbers so that they come in order but are separated by season.
+
+```{r}
+S2015$id <- 145:288
+S2016$id <- 289:400
+```
+
+## Combining the Season Data Frames
+
+Now that there is no conflict with id labeling, we will join the 2014 and 2015 data
+tables, then add the 2016 data table to that.
+
+```{r}
+MSCData <- S2014
+for (i in 1:nrow(S2015)){
+  MSCData <- S2015[i,]
+}
+for (i in nrow(S2016)){
+  MSCData <- S2016[i,]
+}
+```
+
