@@ -9,10 +9,21 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Load the Separate Data Frames
+
+Load the data for each year:
+
+```{r}
+load("data/S2014.rda")
+load("data/S2015.rda")
+load("data/S2016.rda")
+```
+
+
 Now, we will combine the season data frames into one data frame containing all
 of the games from each season collected.
 
-##Labeling the Data
+## Labeling the Data
 
 First, I will re-label the ID numbers so that they come in order but are separated by season.
 
@@ -26,7 +37,7 @@ S2016$id <- 289:400
 Now that there is no conflict with id labeling, we will join the 2014 and 2015 data
 tables, then add the 2016 data table to that.
 
-```{r}
+```{r eval = FALSE}
 MSCData <- S2014
 for (i in 1:nrow(S2015)){
   MSCData <- S2015[i,]
@@ -35,4 +46,27 @@ for (i in nrow(S2016)){
   MSCData <- S2016[i,]
 }
 ```
+
+Surely it's easier to do this:
+
+```{r}
+MSCData <- rbind(S2014, S2015, S2016)
+```
+
+
+## Clean the Data
+
+Now do your cleaning (splitting columns into separate variable as needed).
+
+## Save the Data
+
+Then save the full data frame:
+
+```{r}
+save(MSCData, file = "data/MSCData.rda")
+```
+
+
+
+
 
