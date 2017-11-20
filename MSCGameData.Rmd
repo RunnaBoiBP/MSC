@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)  # need this (or at least DataComputing) for dplyr stuff
 ```
 
 ## Load the Separate Data Frames
@@ -27,12 +28,16 @@ of the games from each season collected.
 
 First, I will re-label the ID numbers so that they come in order but are separated by season.
 
-```{r}
+```{r eval = FALSE}
 S2015$id <- 145:288
 S2016$id <- 289:400
 ```
 
-## Combining the Season Data Frames
+Do not do the above!  It destroys the point of providing an id number that links each pair of rows associated with a game.
+
+
+
+## Combining the Season Data Frames (and adding IDs)
 
 Now that there is no conflict with id labeling, we will join the 2014 and 2015 data
 tables, then add the 2016 data table to that.
@@ -52,6 +57,15 @@ Surely it's easier to do this:
 ```{r}
 MSCData <- rbind(S2014, S2015, S2016)
 ```
+
+Now let's handle those IDs:
+
+```{r}
+MSCData <-
+  MSCData %>% 
+  mutate(id = paste(id, Season, sep = "_"))
+```
+
 
 
 ## Clean the Data

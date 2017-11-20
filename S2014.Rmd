@@ -52,13 +52,22 @@ page <- read_html(filename)
 ```
 
 
-```{r echo=FALSE}
+```{r eval=FALSE}
 # Psst!  Source-file readers!
 # I'll read in my locally-stored page.
 # If you wish to knit this document, replace the path-name below
 # with the path-name for your locally-stored html page.
 page <- read_html("/home/GEORGETOWNCOLLEGE.EDU/bpeterson/MSCBballShiny/DakStatsPages/MSCbball1415.html")
 ```
+
+In a project, this should be:
+
+```{r}
+page <- read_html("DakStatsPages/MSCbball1415.html")
+```
+
+Relative URLs are almost always best, as they work even when you share your repository with other people.
+
 
 
 ## Get the URLS
@@ -111,9 +120,9 @@ team <- character(2*n)
 status <- character(2*n)
 
 for ( i in seq(1, 2*n-1, by = 2) ) {
-  id[c(i, i + 1)] <- i
-  team[i] <- confGames$awayTeam[i]
-  team[i + 1] <- confGames$homeTeam[i]
+  id[c(i, i + 1)] <- (i + 1)/2
+  team[i] <- confGames$awayTeam[(i + 1)/2]
+  team[i + 1] <- confGames$homeTeam[(i+1)/2]
   status[i] <- "Away"
   status[i + 1] <- "Home"
 }
