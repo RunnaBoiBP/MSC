@@ -7,21 +7,96 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+<<<<<<< HEAD
 library(DataComputing)
+=======
+library(tidyverse)  # need this (or at least DataComputing) for dplyr stuff
+>>>>>>> 1cbbb05a74d824d132a87163fdee90c7efee9f04
 ```
+
+## Load the Separate Data Frames
+
+Load the data for each year:
+
+```{r}
+load("data/S2014.rda")
+load("data/S2015.rda")
+load("data/S2016.rda")
+```
+
 
 Now, we will combine the season data frames into one data frame containing all
 of the games from each season collected.
 
+<<<<<<< HEAD
 ## Combining the Season Data Frames
+=======
+## Labeling the Data
+
+First, I will re-label the ID numbers so that they come in order but are separated by season.
+
+```{r eval = FALSE}
+S2015$id <- 145:288
+S2016$id <- 289:400
+```
+
+Do not do the above!  It destroys the point of providing an id number that links each pair of rows associated with a game.
+
+
+
+## Combining the Season Data Frames (and adding IDs)
+>>>>>>> 1cbbb05a74d824d132a87163fdee90c7efee9f04
 
 First, we will join the 2014, 2015, 2016 data frames into a frame containing all three seasons.
 
+<<<<<<< HEAD
 ```{r}
 MSCData <- rbind(S2014, S2015, S2016)
 
 MSCData <-
 +  MSCData %>% 
 +  mutate(id = paste(id, Season, sep = "_"))
+=======
+```{r eval = FALSE}
+MSCData <- S2014
+for (i in 1:nrow(S2015)){
+  MSCData <- S2015[i,]
+}
+for (i in nrow(S2016)){
+  MSCData <- S2016[i,]
+}
+>>>>>>> 1cbbb05a74d824d132a87163fdee90c7efee9f04
 ```
+
+Surely it's easier to do this:
+
+```{r}
+MSCData <- rbind(S2014, S2015, S2016)
+```
+
+Now let's handle those IDs:
+
+```{r}
+MSCData <-
+  MSCData %>% 
+  mutate(id = paste(id, Season, sep = "_"))
+```
+
+
+
+## Clean the Data
+
+Now do your cleaning (splitting columns into separate variable as needed).
+
+## Save the Data
+
+Then save the full data frame:
+
+```{r}
+save(MSCData, file = "data/MSCData.rda")
+```
+
+
+
+
 

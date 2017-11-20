@@ -60,7 +60,6 @@ page <- read_html(filename)
 page <- read_html("DakStatsPages/MSCbball1415.html")
 ```
 
-
 ## Get the URLS
 
 Let's scrape the season page for the URLs of the game pages we need to consult.  All you have to do is peer deeply into the page and find CSS selectors that are associated with the data you want.
