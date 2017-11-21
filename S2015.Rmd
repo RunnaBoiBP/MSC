@@ -52,7 +52,7 @@ page <- read_html(filename)
 ```
 
 
-```{r eval=FALSE}
+```{r echo = FALSE}
 # Psst!  Source-file readers!
 # I'll read in my locally-stored page.
 # If you wish to knit this document, replace the path-name below
@@ -113,11 +113,8 @@ status <- character(2*n)
 for ( i in seq(1, 2*n-1, by = 2) ) {
   id[c(i, i + 1)] <- (i + 1)/2
   team[i] <- confGames$awayTeam[(i + 1)/2]
-<<<<<<< HEAD
   team[i + 1] <- confGames$homeTeam[(i+1)/2]
-=======
   team[i + 1] <- confGames$homeTeam[(i + 1)/2]
->>>>>>> 1cbbb05a74d824d132a87163fdee90c7efee9f04
   status[i] <- "Away"
   status[i + 1] <- "Home"
 }

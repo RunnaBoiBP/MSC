@@ -52,7 +52,7 @@ page <- read_html(filename)
 ```
 
 
-```{r eval=FALSE}
+```{r echo = FALSE}
 # Psst!  Source-file readers!
 # I'll read in my locally-stored page.
 # If you wish to knit this document, replace the path-name below

@@ -1,0 +1,89 @@
+---
+title: "MSC Basketball Data Analysis"
+author: "Ben Peterson"
+date: "11/21/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(DataComputing)
+library(tidyverse)
+library(tigerstats)
+```
+
+First, I will load in the full MSC Game Data:
+
+```{r}
+load("data/MSCData.rda")
+```
+
+## Creating a Column for the Two and Three Point Shooting Percentages
+
+It may be of interest in this project to know what the shooting percentages were for each team in each game. For this reason, I will create the additional columns now.
+
+### Three Point Shooting Percentages
+
+First, I will make the column for the 3 point shooting percentages for each team in each game.
+
+```{r}
+MSCDataFinal=data.frame(MSCDataFinal,X3Perc=100*(MSCDataFinal$X3PM/MSCDataFinal$X3PA))
+MSCDataFinal
+```
+
+### Two Point Shooting Percentages
+
+Next, I will make the column for the 2 point shooting percentages for each team in each game.
+
+```{r}
+MSCDataFinal=data.frame(MSCDataFinal,X2Perc=100*(MSCDataFinal$X2PM/MSCDataFinal$X2PA))
+MSCDataFinal
+```
+
+## MSC Data Analysis
+
+I am creating a data frame called fgs, which will sum the total two and three pointers made and attempted for each team throughout the course of all three seasons. 
+
+```{r}
+fgs=data.frame(aggregate(MSCDataFinal$X3PM~MSCDataFinal$team,
+                         data=MSCDataFinal,FUN=sum),
+               aggregate(MSCDataFinal$X3PA~MSCDataFinal$team,
+                         data=MSCDataFinal,FUN=sum),
+               aggregate(MSCDataFinal$X2PM~MSCDataFinal$team,
+                         data=MSCDataFinal,FUN=sum),
+               aggregate(MSCDataFinal$X2PA~MSCDataFinal$team,
+                         data=MSCDataFinal,FUN=sum))
+fgs=fgs[,c(-3,-5,-7)]
+
+fgs
+```
+
+Thus, I can calculate a percentage of shots made for each team in the data frame, and get that team's two and three point average over the three season span.
+
+```{r}
+fgs=data.frame(fgs, Perc2=100*(fgs$MSCDataFinal.X2PM/fgs$MSCDataFinal.X2PA))
+fgs=data.frame(fgs, Perc3=100*(fgs$MSCDataFinal.X3PM/fgs$MSCDataFinal.X3PA))
+fgs
+```
+
+## Preliminary Conclusion
+
+So far, it is possible to conclude which teams are the better teams in terms of two point shooting and three point shooting. I will create a table that arranges these in descending order, so that the teams will be ranked in terms of offensive efficiency.
+
+### Two Point Offensive Efficiency Ranking
+```{r}
+fgs %>%
+  select(MSCDataFinal.team, Perc2) %>%
+  mutate(ranking=rank(desc(Perc2))) %>%
+  arrange(ranking)
+```
+
+### Three Point Offensive Efficiency Ranking
+
+```{r}
+fgs %>%
+  select(MSCDataFinal.team, Perc3) %>%
+  mutate(ranking=rank(desc(Perc3))) %>%
+  arrange(ranking)
+```
+
