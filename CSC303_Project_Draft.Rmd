@@ -12,6 +12,21 @@ library(tidyverse)
 library(tigerstats)
 ```
 
+## Draft Comments
+
+Since you are just getting started I mostly have to address overall structure, leaving many technical details to you as work on the final version of the report.
+
+* Re-read the project assignment pdf:  you must follow all requirements for the draft (format, sections, tables, etc.).  Since data import is a big part of your project, you'll must incorporate at least a discussion of it into your final report.
+* As much as possible, do your data wrangling with **dplyr** and other tools we learned in class this semester.  Don't just copy what you did in Spring 2018.
+* Do not limit yourself to the analysis you did in Spring 2018.  Here are some suggestions for further work.
+    * Now that you have multitple seaosns, you can compute things like FG percentage for each team, for each season.
+    * You can choose a few leading teams to follow over all seasons.  For example, you could study a particular offensive stat (FG percentage, say) for each of the leading teams over the years.  You could make a graph using `geom_line()` that shows how each team's FG percentage has varied over the seasons.
+* Whatever analysis you do, make sure that it adds up to a coherent investigation, not just a few random tables and graphs.  Build your report around that investigation.  (For example, the Introduction should indicate what questions you bring to the data, and why.)
+    
+I have a few technical comments below, and also in the R Markdown documents that concerend data cleaning.
+
+## End of Draft Comments
+
 First, I will load in the full MSC Game Data:
 
 ```{r}
@@ -26,9 +41,12 @@ It may be of interest in this project to know what the shooting percentages were
 
 First, I will make the column for the 3 point shooting percentages for each team in each game.
 
+**HSW:  In any doucment that is intended to be knit up, do not print out a long data table directl.  Use something like `DT::datatable()` instead.  I'll make those changes here, so I can navigate the knitted document.**
+
 ```{r}
-MSCDataFinal=data.frame(MSCDataFinal,X3Perc=100*(MSCDataFinal$X3PM/MSCDataFinal$X3PA))
-MSCDataFinal
+MSCDataFinal=data.frame(MSCDataFinal,
+                        X3Perc=100*(MSCDataFinal$X3PM/MSCDataFinal$X3PA))
+## MSCDataFinal
 ```
 
 ### Two Point Shooting Percentages
@@ -36,8 +54,11 @@ MSCDataFinal
 Next, I will make the column for the 2 point shooting percentages for each team in each game.
 
 ```{r}
-MSCDataFinal=data.frame(MSCDataFinal,X2Perc=100*(MSCDataFinal$X2PM/MSCDataFinal$X2PA))
-MSCDataFinal
+MSCDataFinal=data.frame(MSCDataFinal,
+                        X2Perc=100*(MSCDataFinal$X2PM/MSCDataFinal$X2PA))
+DT::datatable(MSCDataFinal, options = list(
+  scrollX = TRUE
+))
 ```
 
 ## MSC Data Analysis
@@ -55,15 +76,17 @@ fgs=data.frame(aggregate(MSCDataFinal$X3PM~MSCDataFinal$team,
                          data=MSCDataFinal,FUN=sum))
 fgs=fgs[,c(-3,-5,-7)]
 
-fgs
+DT::datatable(fgs)
 ```
+
+**HSW:  Ben, you are copying from your Spring 2017 project.  Find an easier way to accomplish the summaries, using dply commands that you learned this semester.**
 
 Thus, I can calculate a percentage of shots made for each team in the data frame, and get that team's two and three point average over the three season span.
 
 ```{r}
 fgs=data.frame(fgs, Perc2=100*(fgs$MSCDataFinal.X2PM/fgs$MSCDataFinal.X2PA))
 fgs=data.frame(fgs, Perc3=100*(fgs$MSCDataFinal.X3PM/fgs$MSCDataFinal.X3PA))
-fgs
+knitr::kable(fgs)
 ```
 
 ## Preliminary Conclusion
@@ -75,8 +98,11 @@ So far, it is possible to conclude which teams are the better teams in terms of 
 fgs %>%
   select(MSCDataFinal.team, Perc2) %>%
   mutate(ranking=rank(desc(Perc2))) %>%
-  arrange(ranking)
+  arrange(ranking) %>% 
+  knitr::kable()
 ```
+
+**HSW:  Note that when the doucment knits a warning appears here, even though no such warning appears when you run the command from the Console.  It's a known quirk with knitr.  You can suppress such spurious output with  chunk options like `warning = FALSE` and `message = FALSE`.**
 
 ### Three Point Offensive Efficiency Ranking
 
@@ -84,6 +110,7 @@ fgs %>%
 fgs %>%
   select(MSCDataFinal.team, Perc3) %>%
   mutate(ranking=rank(desc(Perc3))) %>%
-  arrange(ranking)
+  arrange(ranking) %>% 
+  knitr::kable()
 ```
 

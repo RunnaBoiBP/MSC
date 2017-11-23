@@ -59,7 +59,7 @@ MSCDataFGMSplit
 
 Next, I will split the ftm column into two separate columns based on free throws made and free throws attempted -- FTM and FTA
 
-```{r}
+```{r eval = FALSE}
 MSCDataFTMSplit<-
   MSCDataFGMSplit %>%
   extractMatches(c("(\\d{2})-(\\d{2})","(\\d{1})-(\\d{2})"),ftm) %>%
@@ -71,6 +71,21 @@ MSCDataFTMSplit <- subset(MSCDataFTMSplit, select = -c(ftm, match1, match2))
 MSCDataFTMSplit
 ```
 
+**HSW:  There is an easier regex for the above work.  See the code below.  The same goes for the three-pointer split, so I'll make that change directly.**
+
+```{r}
+MSCDataFTMSplit<-
+  MSCDataFGMSplit %>%
+  extractMatches("(\\d*)-(\\d*)",ftm) %>%
+  mutate(FTM=as.numeric(as.character(match1))) %>%
+  mutate(FTA=as.numeric(as.character(match2)))
+
+
+MSCDataFTMSplit <- subset(MSCDataFTMSplit, select = -c(ftm, match1, match2))
+MSCDataFTMSplit
+```
+
+
 ### Three Pointer Column Split
 
 Also, I will split the threepm column into two columns, one for three pointers made, and one for three pointers attempted -- X3PM and X3PA
@@ -78,7 +93,7 @@ Also, I will split the threepm column into two columns, one for three pointers m
 ```{r}
 MSCDataX3PMSplit<-
   MSCDataFTMSplit %>%
-  extractMatches(c("(\\d{1})-(\\d{2})","(\\d{2})-(\\d{2})"),threepm) %>%
+  extractMatches("(\\d*)-(\\d*)",threepm) %>%
   mutate(X3PM=as.numeric(as.character(match1))) %>% 
   mutate(X3PA=as.numeric(as.character(match2))) 
 
@@ -91,7 +106,8 @@ MSCDataX3PMSplit
 
 ```{r}
 
-MSCDataFinal=data.frame(MSCDataX3PMSplit,X2PM=MSCDataX3PMSplit$FGM-MSCDataX3PMSplit$X3PM,
+MSCDataFinal=data.frame(MSCDataX3PMSplit,
+                        X2PM=MSCDataX3PMSplit$FGM-MSCDataX3PMSplit$X3PM,
                    X2PA=MSCDataX3PMSplit$FGA-MSCDataX3PMSplit$X3PA)
 MSCDataFinal
 ```
