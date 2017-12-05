@@ -87,3 +87,20 @@ fgs %>%
   arrange(ranking)
 ```
 
+
+
+### Checking to see how offensive efficiency in two point shots has changed over time
+
+Now, we will analyze the offensive effienciencies for two point shooting for the top 5 ranked teams in the Mid-South Conference, to see how they have changed over time. This will enable readers to see if the teams have improved or gotten worse over the three season span.
+
+```{r}
+MSCDataFinal
+```
+
+
+## Graphing the Results
+
+```{r}
+
+```
+

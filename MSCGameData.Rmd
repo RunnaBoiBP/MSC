@@ -46,7 +46,7 @@ Now, I will split the fgm with hyphens into two seperate columns based on whethe
 ```{r}
 MSCDataFGMSplit<-
   MSCData %>%
-  extractMatches("(\\d{2})-(\\d{2})",fgm) %>%
+  extractMatches("(\\d*)-(\\d*)",fgm) %>%
   mutate(FGM=as.numeric(as.character(match1))) %>% 
   mutate(FGA=as.numeric(as.character(match2))) 
 
@@ -62,7 +62,7 @@ Next, I will split the ftm column into two separate columns based on free throws
 ```{r}
 MSCDataFTMSplit<-
   MSCDataFGMSplit %>%
-  extractMatches(c("(\\d{2})-(\\d{2})","(\\d{1})-(\\d{2})"),ftm) %>%
+  extractMatches("(\\d*)-(\\d*)",ftm) %>%
   mutate(FTM=as.numeric(as.character(match1))) %>%
   mutate(FTA=as.numeric(as.character(match2)))
 
@@ -78,7 +78,7 @@ Also, I will split the threepm column into two columns, one for three pointers m
 ```{r}
 MSCDataX3PMSplit<-
   MSCDataFTMSplit %>%
-  extractMatches(c("(\\d{1})-(\\d{2})","(\\d{2})-(\\d{2})"),threepm) %>%
+  extractMatches("(\\d*)-(\\d*)",threepm) %>%
   mutate(X3PM=as.numeric(as.character(match1))) %>% 
   mutate(X3PA=as.numeric(as.character(match2))) 
 

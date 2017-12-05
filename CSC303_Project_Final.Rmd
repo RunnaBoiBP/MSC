@@ -1,0 +1,280 @@
+---
+title: "MSC Basketball Data Analysis"
+author: "Ben Peterson"
+date: "11/21/2017"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(DataComputing)
+library(tidyverse)
+library(mosaic)
+```
+
+## Introduction
+
+Packages required: DataComputing, tidyverse, and I used rvest in the web scraping.
+
+### Purpose of the Project
+
+The NAIA keeps track of all of the basketball statistics for each team in each conference. This project will be focused on the Mid-South Conference from the 2014-2015 season to the 2016-2017 season, creating a three season span. This enables an analysis of how team's offensive capabilites have changed over time, notably field goal percentages for two and three point shooting. This will allow readers to determine whether a specific Mid-South Conference team has improved or gotten worse over the three year span. This report could have implications towards changes in coaching patterns, or even suggest change is needed to improve the quality of the team.
+
+### Acquisition of Data
+
+Separate files have been created for the scraping of the individual seasons' data, as well as a file entitled MSCData.rda that combined the three seasons into one data table. Tidying and cleaning was also done in the file, then the data is imported into this report and analyzed for the shooting percentages and patterns over time.
+
+## Analysis
+
+First, I will load in the full MSC Game Data:
+
+```{r}
+load("data/MSCData.rda")
+```
+
+### Creating a Column for the Two and Three Point Shooting Percentages
+
+It may be of interest in this project to know what the shooting percentages were for each team in each game. For this reason, I will create the additional columns now.
+
+#### Three Point Shooting Percentages
+
+First, I will make the column for the 3 point shooting percentages for each team in each game.
+
+```{r}
+MSCDataFinal <-
+  mutate(MSCDataFinal, X3Perc=100*(MSCDataFinal$X3PM/MSCDataFinal$X3PA))
+```
+
+#### Two Point Shooting Percentages
+
+Next, I will make the column for the 2 point shooting percentages for each team in each game.
+
+```{r}
+MSCDataFinal <-
+  mutate(MSCDataFinal, X2Perc=100*(MSCDataFinal$X2PM/MSCDataFinal$X2PA))
+```
+
+#### Calculates the season 3 point percentage for the conference
+
+The following code will calculate the percentage of the entire conference for three point shooting, which may be of use when comparing an individual team's performance versus the conference average.
+
+```{r}
+MSCDataFinal <-
+  mutate(MSCDataFinal, MSC3Perc=100*(sum(MSCDataFinal$X3PM)/sum(MSCDataFinal$X3PA)))
+MSCDataFinal$MSC3Perc[1]
+```
+
+So the average three point percentage for the entire conference throughout this three year span was about 34.2%.
+
+#### Calculates the season 2 point percentage for the conference
+
+The following code will calculate the percentage of the entire conference for two point shooting, which may be of use when comparing an individual team's performance versus the conference average.
+
+```{r}
+MSCDataFinal <- 
+  mutate(MSCDataFinal, MSC2Perc=100*(sum(MSCDataFinal$X2PM)/sum(MSCDataFinal$X2PA)))
+MSCDataFinal$MSC2Perc[1]
+```
+
+So the two point percentage for the entire conference was around 50% throughout this three year span.
+
+### MSC Data Analysis
+
+I am creating a data frame called fgs, which will sum the total two and three pointers made and attempted for each team throughout the course of all three seasons. 
+
+```{r}
+fgs=data.frame(aggregate(MSCDataFinal$X3PM~MSCDataFinal$team,
+                         data=MSCDataFinal,FUN=sum),
+               aggregate(MSCDataFinal$X3PA~MSCDataFinal$team,
+                         data=MSCDataFinal,FUN=sum),
+               aggregate(MSCDataFinal$X2PM~MSCDataFinal$team,
+                         data=MSCDataFinal,FUN=sum),
+               aggregate(MSCDataFinal$X2PA~MSCDataFinal$team,
+                         data=MSCDataFinal,FUN=sum))
+fgs=fgs[,c(-3,-5,-7)]
+
+```
+
+Thus, I can calculate a percentage of shots made for each team in the data frame, and get that team's two and three point average over the three season span.
+
+```{r}
+fgs=data.frame(fgs, Perc2=100*(fgs$MSCDataFinal.X2PM/fgs$MSCDataFinal.X2PA))
+fgs=data.frame(fgs, Perc3=100*(fgs$MSCDataFinal.X3PM/fgs$MSCDataFinal.X3PA))
+```
+
+### Preliminary Conclusion
+
+So far, it is possible to conclude which teams are the better teams in terms of two point shooting and three point shooting. I will create a table that arranges these in descending order, so that the teams will be ranked in terms of offensive efficiency. The variables, Perc2 and Perc3, will be the team's average percentage for the entire time frame.
+
+#### MSC Team Offensive Efficiency Ranking 2014-2016
+```{r}
+fgs %>%
+  select(MSCDataFinal.team, Perc2, Perc3) %>%
+  mutate(ranking2PE=rank(desc(Perc2))) %>%
+  mutate(ranking3PE=rank(desc(Perc3))) %>%
+  arrange(ranking2PE)
+
+```
+
+
+#### Checking to see how offensive efficiency in two point shots has changed over time
+
+Now, we will analyze the offensive effienciencies for two point shooting for the teams in the Mid-South Conference, to see how they have changed over time. This will enable readers to see if the teams have improved or gotten worse over the three season span.
+
+
+#### 2014 Offensive Statistics
+
+Creating a subset of the MSC Data that only has 2014 statistics. 
+
+```{r echo = FALSE}
+MSCOffense14 <- 
+  MSCDataFinal %>%
+  filter(Season == 2014 ) %>%
+  select(c("id", "team", "Season","status","X2PM", "X2PA", "X3PM", "X3PA", "X2Perc",
+           "X3Perc","MSC2Perc","MSC3Perc"))
+```
+
+
+#### 2015 Offensive Statistics
+
+Creating a subset of the MSC Data that only has 2015 statistics. 
+
+```{r echo = FALSE}
+MSCOffense15 <- 
+  MSCDataFinal %>%
+  filter(Season == 2015) %>%
+  select(c("id", "team", "Season","status","X2PM", "X2PA", "X3PM", "X3PA", "X2Perc",
+           "X3Perc","MSC2Perc","MSC3Perc"))
+```
+
+#### 2016 Offensive Statistics
+
+Creating a subset of the MSC Data that only has 2016 statistics. 
+
+```{r echo = FALSE}
+MSCOffense16 <- 
+  MSCDataFinal %>%
+  filter(Season == 2016) %>%
+  select(c("id", "team", "Season","status","X2PM", "X2PA", "X3PM", "X3PA", "X2Perc",
+           "X3Perc", "MSC2Perc","MSC3Perc"))
+```
+
+#### Comparing the Stats for each of the Three Seasons
+
+Using the same process as I did for the entire MSC Dataset, I will create subsets of the fgs dataframe that only use the data per specific season.
+
+##### 2014 Season Statistics Per Team
+
+```{r}
+fgs14=data.frame(aggregate(MSCOffense14$X2PM~MSCOffense14$team,
+                         data=MSCOffense14,FUN=sum),
+                 aggregate(MSCOffense14$X2PA~MSCOffense14$team,
+                         data=MSCOffense14,FUN=sum),
+                 aggregate(MSCOffense14$X3PM~MSCOffense14$team,
+                         data=MSCOffense14,FUN=sum),
+                 aggregate(MSCOffense14$X3PA~MSCOffense14$team,
+                         data=MSCOffense14,FUN=sum))
+
+fgs14=fgs14[,c(-3,-5,-7)]
+
+
+fgs14=data.frame(fgs14, Perc2=100*(fgs14$MSCOffense14.X2PM/fgs14$MSCOffense14.X2PA))
+fgs14=data.frame(fgs14, Perc3=100*(fgs14$MSCOffense14.X3PM/fgs14$MSCOffense14.X3PA))
+
+```
+
+
+##### 2015 Season Statistics Per Team
+
+```{r}
+fgs15=data.frame(aggregate(MSCOffense15$X2PM~MSCOffense15$team,
+                         data=MSCOffense15,FUN=sum),
+                 aggregate(MSCOffense15$X2PA~MSCOffense15$team,
+                         data=MSCOffense15,FUN=sum),
+                 aggregate(MSCOffense15$X3PM~MSCOffense15$team,
+                         data=MSCOffense15,FUN=sum),
+                 aggregate(MSCOffense15$X3PA~MSCOffense15$team,
+                         data=MSCOffense15,FUN=sum))
+
+fgs15=fgs15[,c(-3,-5,-7)]
+
+
+fgs15=data.frame(fgs15, Perc2=100*(fgs15$MSCOffense15.X2PM/fgs15$MSCOffense15.X2PA))
+fgs15=data.frame(fgs15, Perc3=100*(fgs15$MSCOffense15.X3PM/fgs15$MSCOffense15.X3PA))
+```
+
+
+##### 2016 Season Statistics Per Team
+
+```{r}
+fgs16=data.frame(aggregate(MSCOffense16$X2PM~MSCOffense16$team,
+                         data=MSCOffense16,FUN=sum),
+                 aggregate(MSCOffense16$X2PA~MSCOffense16$team,
+                         data=MSCOffense16,FUN=sum),
+                 aggregate(MSCOffense16$X3PM~MSCOffense16$team,
+                         data=MSCOffense16,FUN=sum),
+                 aggregate(MSCOffense16$X3PA~MSCOffense16$team,
+                         data=MSCOffense16,FUN=sum))
+
+fgs16=fgs16[,c(-3,-5,-7)]
+
+
+fgs16=data.frame(fgs16, Perc2=100*(fgs16$MSCOffense16.X2PM/fgs16$MSCOffense16.X2PA))
+fgs16=data.frame(fgs16, Perc3=100*(fgs16$MSCOffense16.X3PM/fgs16$MSCOffense16.X3PA))
+```
+
+##### Ranking Each Team Per Season 
+
+The following code shows the Offensive Efficiency Rankings for the 9 Mid-South Conference Teams in 2014, 2015, and 2016, respectively. (Note, St. Catharine (Ky.) ceased to exist following the 2015 season, so there are only 8 MSC teams in 2016).
+
+
+
+```{r echo=FALSE}
+fgs14 %>%
+  select(MSCOffense14.team, Perc2, Perc3) %>%
+  mutate(ranking2PE=rank(desc(Perc2))) %>%
+  mutate(ranking3PE=rank(desc(Perc3))) %>%
+  arrange(ranking2PE) %>%
+  DT::datatable(fgs14, colnames=c("MSC Team", "Two Point %", "Three Point %",
+                                  "Two Point Rank", "Three Point Rank"),
+                caption="2014 shooting efficiency for each MSC team
+                and how they rank against the other teams in the conference.")
+```
+
+```{r echo = FALSE}
+fgs15 %>%
+  select(MSCOffense15.team, Perc2, Perc3) %>%
+  mutate(ranking2PE=rank(desc(Perc2))) %>%
+  mutate(ranking3PE=rank(desc(Perc3))) %>%
+  arrange(ranking2PE) %>%
+  DT::datatable(fgs15, colnames=c("MSC Team", "Two Point %", "Three Point %",
+                                  "Two Point Rank", "Three Point Rank"),
+                caption="2015 shooting efficiency for each MSC team
+                and how they rank against the other teams in the conference.")
+```
+
+
+```{r echo=FALSE}
+fgs16 %>%
+  select(MSCOffense16.team, Perc2, Perc3) %>%
+  mutate(ranking2PE=rank(desc(Perc2))) %>%
+  mutate(ranking3PE=rank(desc(Perc3))) %>%
+  arrange(ranking2PE) %>%
+  DT::datatable(fgs16, colnames=c("MSC Team", "Two Point %", "Three Point %",
+                                  "Two Point Rank", "Three Point Rank"),
+                caption="2016 shooting efficiency for each MSC team
+                and how they rank against the other teams in the conference.")
+```
+
+
+## Discussion
+
+Through this analysis, it is possible to track the progress of each team throughout the course of the past three seasons. For example, just analyzing Georgetown (Ky.)'s results show that their two point percentage increased from 2014 to 2015, from 54% to 57%, then decreased dramatically to 47% in 2016. They led the conference in two point shooting efficiency for the first two seasons, then dropped to third last season. For three point shooting, Georgetown has been a lot more spread out, starting the 2014 season in 8th rank with a percentage of 30.8%, then climbing all the way to first with a percentage of 39.6%. The 2015 season seems to be a bit of an outlier for Georgetown in terms of three point shooting, as this impressive season three point success led them all the way to the NAIA National Championship Game, where they finished NAIA #2. The 2016 Season saw a bit of a cooling off for Georgetown, as they fell to 5th rank. The general pattern appears to be that Georgetown saw an increase in offensive efficiency from 2014 to 2015, and then through team members graduating or other factors, have seen a decline in efficiency from 2015 to 2016. 
+
+One way to further the analysis in this project would be to expand the data to more seasons, therefore giving more data to search for patterns. This would give a way to see if teams have improved over time, versus just the three season range. This might not be enough data to draw any conclusions about whether coaching or offensive strategies have played a part in increases or decreases in offensive efficiency. 
+
+## Acknowledgements
+
+Thank you to Homer White for helping with the web scraping and giving feedback and suggestions to help further this project. Also, thank you to Austin Snider and Luke Garnett for undertaking the foundation of this project in the Spring of 2017 with me, that gave me the idea to continue the project this semester.
