@@ -227,9 +227,9 @@ fgs16=data.frame(fgs16, Perc3=100*(fgs16$MSCOffense16.X3PM/fgs16$MSCOffense16.X3
 
 ##### Ranking Each Team Per Season 
 
-The following code shows the Offensive Efficiency Rankings for the 9 Mid-South Conference Teams in 2014, 2015, and 2016, respectively. (Note, St. Catharine (Ky.) ceased to exist following the 2015 season, so there are only 8 MSC teams in 2016).
+The following show the Offensive Efficiency Rankings for the 9 Mid-South Conference Teams in 2014, 2015, and 2016, respectively. (Note, St. Catharine (Ky.) ceased to exist following the 2015 season, so there are only 8 MSC teams in 2016).
 
-
+The following table ranks the MSC teams based on two point and three point efficiency in 2014. They are ordered in ranking of two point efficiency.
 
 ```{r echo=FALSE}
 fgs14 %>%
@@ -243,6 +243,8 @@ fgs14 %>%
                 and how they rank against the other teams in the conference.")
 ```
 
+The following table ranks the MSC teams based on two point and three point efficiency in 2015. They are ordered in ranking of two point efficiency.
+
 ```{r echo = FALSE}
 fgs15 %>%
   select(MSCOffense15.team, Perc2, Perc3) %>%
@@ -255,7 +257,7 @@ fgs15 %>%
                 and how they rank against the other teams in the conference.")
 ```
 
-
+The following table ranks the MSC teams based on two point and three point efficiency in 2016. They are ordered in ranking of two point efficiency.
 ```{r echo=FALSE}
 fgs16 %>%
   select(MSCOffense16.team, Perc2, Perc3) %>%
